@@ -14,7 +14,7 @@ ln -s <clone-path>/command-deps-check/deps-check.md ~/.claude/commands/deps-chec
 
 ## Usage
 
-```
+```text
 /deps-check              # Full analysis
 /deps-check --security   # Security vulnerabilities only
 /deps-check --outdated   # Outdated packages only

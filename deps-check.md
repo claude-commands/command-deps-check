@@ -12,12 +12,14 @@ Run a comprehensive dependency analysis.
 **Usage:** `/deps-check [options]`
 
 **Examples:**
+
 - `/deps-check` - Full analysis (security, outdated, unused)
 - `/deps-check --security` - Security vulnerabilities only
 - `/deps-check --outdated` - Outdated packages only
 - `/deps-check --unused` - Unused dependencies only
 
 **Workflow:**
+
 1. Identify package manager (npm, go mod, pip, cargo)
 2. Check for security vulnerabilities
 3. Find outdated packages
@@ -54,26 +56,30 @@ Analyze dependencies based on specified focus area.
 2. **Security Vulnerability Check**
 
    **Node.js**:
+
    ```bash
    npm audit --json 2>/dev/null || yarn audit --json 2>/dev/null
-   ```
+   ```text
 
    **Go**:
+
    ```bash
    go list -m -json all | go run golang.org/x/vuln/cmd/govulncheck@latest
    # Or check: govulncheck ./...
-   ```
+   ```text
 
    **Python**:
+
    ```bash
    pip-audit --format=json 2>/dev/null
    # Or: safety check --json
-   ```
+   ```text
 
    **Rust**:
+
    ```bash
    cargo audit --json 2>/dev/null
-   ```
+   ```text
 
    Parse results and categorize by severity:
    - **Critical**: Remote code execution, data breach
@@ -84,19 +90,22 @@ Analyze dependencies based on specified focus area.
 3. **Outdated Package Check**
 
    **Node.js**:
+
    ```bash
    npm outdated --json 2>/dev/null
-   ```
+   ```text
 
    **Go**:
+
    ```bash
    go list -m -u -json all 2>/dev/null
-   ```
+   ```text
 
    **Python**:
+
    ```bash
    pip list --outdated --format=json 2>/dev/null
-   ```
+   ```text
 
    Categorize updates:
    - **Major**: Breaking changes likely (1.x → 2.x)
@@ -106,24 +115,27 @@ Analyze dependencies based on specified focus area.
 4. **Unused Dependency Check**
 
    **Node.js**:
+
    ```bash
    # Check each dependency in package.json
    # Search for imports in codebase
    rg "from ['\"]package-name" --type ts --type js
    rg "require\(['\"]package-name" --type js
-   ```
+   ```text
 
    **Go**:
+
    ```bash
    # go mod tidy will report unused
    go mod tidy -v 2>&1 | grep "unused"
-   ```
+   ```text
 
    **Python**:
+
    ```bash
    # Check imports vs requirements
    rg "^import pkg|from pkg import" --type py
-   ```
+   ```text
 
 5. **Analyze Dependencies**
 
@@ -162,23 +174,26 @@ Analyze dependencies based on specified focus area.
    - **Impact**: Remote code execution possible
    ```bash
    npm install lodash@4.17.21
-   ```
+   ```text
 
    ## Outdated Packages
 
    ### Major Updates (Breaking Changes Likely)
+
    | Package | Current | Latest | Age |
    |---------|---------|--------|-----|
    | react | 17.0.2 | 18.2.0 | 1 year |
    | webpack | 4.46.0 | 5.88.0 | 2 years |
 
    ### Minor Updates (New Features)
+
    | Package | Current | Latest |
    |---------|---------|--------|
    | axios | 1.4.0 | 1.6.0 |
    | typescript | 5.0.0 | 5.3.0 |
 
    ### Patch Updates (Bug Fixes)
+
    | Package | Current | Latest |
    |---------|---------|--------|
    | eslint | 8.50.0 | 8.52.0 |
@@ -186,6 +201,7 @@ Analyze dependencies based on specified focus area.
    ## Unused Dependencies
 
    These packages appear unused:
+
    | Package | Size | Last Import |
    |---------|------|-------------|
    | moment | 290KB | None found |
@@ -197,11 +213,13 @@ Analyze dependencies based on specified focus area.
    ## Recommendations
 
    ### Immediate Actions
+
    1. Fix critical vulnerability in lodash
    2. Remove unused dependencies
    3. Update patch-level dependencies
 
    ### Planned Updates
+
    1. Plan React 18 migration (breaking changes)
    2. Update webpack when ready for v5
 
@@ -219,8 +237,9 @@ Analyze dependencies based on specified focus area.
 
    # Update specific package
    npm install axios@latest
-   ```
-   ```
+   ```text
+
+   ```text
 
 7. **Provide Upgrade Path**
 
